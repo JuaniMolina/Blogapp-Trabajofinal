@@ -1,0 +1,11 @@
+{% extends "Blogapp/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+    POSTEOS
+{% endblock %}
+
+{% block boton-principal %}<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'lista_posteos' %}"> Lista de posteos </a> {% endblock %}
+{% block boton-secundario %}<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'nuevoPost' %}"> Nuevo Posteo </a> {% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends "Blogapp/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+    POSTEOS
+{% endblock %}
+
+{% block contenido %}
+    {% for posteo in posteos %}
+        <li> {{posteo.titulo}} - {{ posteo.subtitulo }} </li>
+    {% endfor %}
+{% endblock %}
