@@ -7324,6 +7324,10 @@ textarea.form-control-lg {
   margin-top: 3rem !important;
 }
 
+.mt-5-1 {
+  margin-top: 0 !important;
+}
+
 .mt-auto {
   margin-top: auto !important;
 }
@@ -11294,6 +11298,12 @@ html {
 .btn-xl {
   text-transform: uppercase;
   padding: 1.5rem 3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+.btn-xm {
+  text-transform: uppercase;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.1rem;

@@ -1,0 +1,28 @@
+{% extends "Blogapp/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+    {{post.titulo}}
+{% endblock %}
+
+{% block subtitulo %}
+    {{post.subtitulo}}
+{% endblock %}
+
+{% block contenido %} 
+        <div style="text-align: center;">
+            <img src="{{ post.imagen }}" alt="{{ post.titulo }}">
+        </div>
+        <div style="text-align: center;">
+            <p>
+                {{ post.cuerpo }}
+                <br><div style="text-align:center;"><em> "{{ post.autor }}"</em></div>
+            </p>
+        </div>
+        <div style="text-align: right;">
+            <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="#"> Editar </a>
+            <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'borrar_post' post.id %}"> Eliminar </a>
+            <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'lista_posteos' %}"> Volver </a>
+        </div> 
+{% endblock %}

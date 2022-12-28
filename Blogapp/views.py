@@ -14,8 +14,10 @@ def posteos (request):
 
 def lista_posteos (request):
     posteos = Post.objects.all()
-    return render(request, 'Blogapp/lista_posteos.html', {'posteos': posteos})
-
+    if posteos != None:
+        return render(request, 'Blogapp/lista_posteos.html', {'posteos': posteos})
+    else:
+        return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Todavía no hay posteos'}) 
 
 def postFormulario(request):
     if request.method == 'POST':
@@ -37,3 +39,14 @@ def postFormulario(request):
     else:
         form = PostForm()
         return render(request, 'Blogapp/postFormulario.html', {'form': form})
+
+def mostrarPost(request, id):
+    post = Post.objects.get(id=id)
+    return render(request, 'Blogapp/mostrarPost.html', {'post': post})
+
+def borrar_post(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'Post borrado exitosamente'})
+    
+    
