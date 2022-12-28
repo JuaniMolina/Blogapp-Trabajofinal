@@ -13,4 +13,6 @@ urlpatterns = [
     path('mostrarPost/<id>', mostrarPost, name='mostrarPost'),
     path('borrar_post/<id>', borrar_post, name='borrar_post'),
     path('editar_post/<id>', editar_post, name='editar_post'),
+
+    path('about/', about, name='about'),
 ]

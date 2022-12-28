@@ -1,0 +1,32 @@
+{% extends "Blogapp/padre.html" %}
+
+{% load static %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block titulo %}
+    SOBRE MI
+{% endblock %}
+
+{% block contenido %}
+    
+    <section>
+        <div class="team-member" style="text-align: center;">
+            <img class="mx-auto rounded-circle" src="{% static 'Blogapp\assets\img\20191216_113116.jpg' %}" alt="..." />
+            <h4>Juan Ignacio Molina</h4>
+            <p class="text-muted">Desarrollador</p>
+            <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/fuaninacio/" target="_blank" aria-label="Juan Molina instagram profile"><i class="fab fa-instagram"></i></a>
+            <a class="btn btn-dark btn-social mx-2" href="https://github.com/JuaniMolina?tab=repositories" target="_blank" aria-label="Juan Molina github profile"><i class="fab fa-github"></i></a>
+            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/juan-ignacio-molina/" target="_blank" aria-label="Juan Molina linkedin profile"><i class="fab fa-linkedin-in"></i></a>
+            <div>
+                <p>
+                    <br>
+                    bla bla bla bla bla bla bla
+                </p>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

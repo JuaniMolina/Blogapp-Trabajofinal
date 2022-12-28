@@ -9,6 +9,8 @@ from Blogapp.forms import PostForm
 def inicio (request):
     return render(request, 'Blogapp/inicio.html')
 
+
+#  Views relacionadas a los posteos 
 def posteos (request):
     return render(request, 'Blogapp/posteos.html')    
 
@@ -67,3 +69,6 @@ def editar_post (request, id):
     else:
         form = PostForm(initial={'titulo': post.titulo, 'subtitulo': post.subtitulo, 'cuerpo': post.cuerpo, 'autor': post.autor, 'fecha': post.fecha, 'imagen': post.imagen})
         return render(request, 'Blogapp/editar_post.html', {'form': form, 'post': post})
+
+def about (request):
+    return render(request, 'Blogapp/about.html')
