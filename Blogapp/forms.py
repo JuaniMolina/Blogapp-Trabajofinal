@@ -8,4 +8,4 @@ class PostForm(forms.Form):
     cuerpo = forms.CharField(label="cuerpo", widget=forms.Textarea)
     autor = forms.CharField(label="autor", max_length=50)
     fecha = forms.DateField(label="fecha")
-    imagen = forms.ImageField(label="imagen")
+    imagen = forms.ImageField(label="imagen", required=False)

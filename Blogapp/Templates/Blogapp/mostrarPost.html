@@ -8,6 +8,7 @@
 
 {% block subtitulo %}
     {{post.subtitulo}}
+    {{ mensaje }}
 {% endblock %}
 
 {% block contenido %} 
@@ -21,7 +22,7 @@
             </p>
         </div>
         <div style="text-align: right;">
-            <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="#"> Editar </a>
+            <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'editar_post' post.id %}"> Editar </a>
             <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'borrar_post' post.id %}"> Eliminar </a>
             <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'lista_posteos' %}"> Volver </a>
         </div> 

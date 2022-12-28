@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block contenido %} 
-    <form id="postear" action="{% url 'nuevoPost' %}" method="POST"> {% csrf_token %} 
+    <form action="{% url 'nuevoPost' %}" method="POST"> {% csrf_token %} 
         <table>
             {{ form.as_table }}
         </table>
