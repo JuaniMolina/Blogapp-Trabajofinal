@@ -26,8 +26,13 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'posteos' %}">Post</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li>
+                    {% else %}    
+                        <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>

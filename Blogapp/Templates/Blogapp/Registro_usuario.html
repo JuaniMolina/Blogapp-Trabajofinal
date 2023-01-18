@@ -1,0 +1,27 @@
+{% extends "Blogapp/padre.html" %}
+
+{% load static %}
+
+{% block title %}
+    Registro
+{% endblock %}
+
+{% block titulo %}
+    Nuevo Usuario
+{% endblock %}
+
+{% block subtitulo %}
+    {{ mensaje }}
+{% endblock %}
+
+{% block contenido %} 
+    <form action="{% url 'registro' %}" method="POST"> {% csrf_token %} 
+        <table>
+            {{ form.as_table }}
+        </table>
+        
+        <input class="btn btn-primary btn-xm rounded-pill mt-5" type="submit" value="Crear Usuario">
+        <a class="btn btn-primary btn-xm rounded-pill mt-5" href="{% url 'inicio' %}"> Volver </a>
+    </form>
+    
+{% endblock %}

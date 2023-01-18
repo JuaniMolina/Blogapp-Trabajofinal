@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from Blogapp.views import * #importamos todas las vistas de Blogapp
+from Bloggmensaje.views import * #importamos todas las vistas de Bloggmensaje
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('Blogapp/', include('Blogapp.urls')),
+    path ('', include('Blogapp.urls')),
+    path ('', include('Bloggmensaje.urls')),
+    path ('', include('Blogregistro.urls')),
 ]

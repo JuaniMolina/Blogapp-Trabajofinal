@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Post
 
 from Blogapp.forms import PostForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -10,7 +12,9 @@ def inicio (request):
     return render(request, 'Blogapp/inicio.html')
 
 
-#  Views relacionadas a los posteos 
+#  Views relacionadas a los posteos
+
+
 def posteos (request):
     return render(request, 'Blogapp/posteos.html')    
 
@@ -19,8 +23,9 @@ def lista_posteos (request):
     if len(posteos) != 0:
         return render(request, 'Blogapp/lista_posteos.html', {'posteos': posteos})
     else:
-        return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Todavía no hay posteos'}) 
+        return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Todavía no hay posteos. Crea uno!'}) 
 
+@login_required
 def postFormulario(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -46,11 +51,14 @@ def mostrarPost(request, id):
     post = Post.objects.get(id=id)
     return render(request, 'Blogapp/mostrarPost.html', {'post': post})
 
+
+@login_required
 def borrar_post(request, id):
     post = Post.objects.get(id=id)
     post.delete()
     return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'Post borrado exitosamente'})
 
+@login_required
 def editar_post (request, id):
     post = Post.objects.get(id=id)
     if request.method == 'POST':
