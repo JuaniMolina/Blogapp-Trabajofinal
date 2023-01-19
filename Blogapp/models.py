@@ -8,8 +8,8 @@ class Post(models.Model):
     cuerpo = models.TextField()
     autor = models.CharField(max_length=50)
     fecha = models.DateField()
-    imagen = models.ImageField(upload_to='Blogapp/img')
-
+    imagen = models.ImageField(upload_to='Img_Post')
+    
     def __str__(self):
         return self.titulo
 

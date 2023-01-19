@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
 
+from Blogregistro.views import obtener_avatar
 from Blogapp.forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -40,12 +41,12 @@ def postFormulario(request):
             post = Post(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha, imagen=imagen)
             post.save()
             
-            return render(request, 'Blogapp/mostrarPost.html', {'post': post})
+            return render(request, 'Blogapp/mostrarPost.html', {'post': post, 'avatar': obtener_avatar(request)})
         else:
-            return render(request, 'Blogapp/postFormulario.html', {'form': form})
+            return render(request, 'Blogapp/postFormulario.html', {'form': form, 'avatar': obtener_avatar(request)})
     else:
         form = PostForm()
-        return render(request, 'Blogapp/postFormulario.html', {'form': form})
+        return render(request, 'Blogapp/postFormulario.html', {'form': form, 'avatar': obtener_avatar(request)})
 
 def mostrarPost(request, id):
     post = Post.objects.get(id=id)
@@ -56,7 +57,7 @@ def mostrarPost(request, id):
 def borrar_post(request, id):
     post = Post.objects.get(id=id)
     post.delete()
-    return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'Post borrado exitosamente'})
+    return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'Post borrado exitosamente', 'avatar': obtener_avatar(request)})
 
 @login_required
 def editar_post (request, id):
@@ -73,10 +74,10 @@ def editar_post (request, id):
             post.imagen = info['imagen']
             post.save()
             posteos = Post.objects.all()
-            return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Post editado exitosamente', 'posteos': posteos})        
+            return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Post editado exitosamente', 'posteos': posteos, 'avatar': obtener_avatar(request)})        
     else:
         form = PostForm(initial={'titulo': post.titulo, 'subtitulo': post.subtitulo, 'cuerpo': post.cuerpo, 'autor': post.autor, 'fecha': post.fecha, 'imagen': post.imagen})
-        return render(request, 'Blogapp/editar_post.html', {'form': form, 'post': post})
+        return render(request, 'Blogapp/editar_post.html', {'form': form, 'post': post, 'avatar': obtener_avatar(request)})
 
 def about (request):
     return render(request, 'Blogapp/about.html')

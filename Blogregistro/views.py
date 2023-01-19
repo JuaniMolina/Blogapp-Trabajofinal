@@ -2,11 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
+from .models import Avatar
 
-from Blogregistro.froms import FormularioRegistro
+from Blogregistro.froms import FormularioRegistro, Formulario_Edicion_Usuario
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+def obtener_avatar(request):
+    lista = Avatar.objects.filter(usuario=request.user)
+    if len(lista) != 0:
+        avatar = lista[0].imagen.url
+    else:
+        avatar = '/media/avatar/defecto.png'
+    return avatar
 
 def registro_usuario(request):
     if request.method == 'POST':
@@ -40,3 +49,22 @@ def login_usuario(request):
         form= AuthenticationForm()
         return render(request, 'Blogapp/Login_usuario.html', {'form': form})
 
+@login_required
+def editar_usuario(request):
+    usuario=request.user
+    if request.method == 'POST':
+        form = Formulario_Edicion_Usuario(request.POST)
+        if form.is_valid():
+            info = form.cleaned_data
+            usuario.email = info['email']
+            usuario.first_name = info['first_name']
+            usuario.last_name = info['last_name']
+            usuario.password1 = info['password1']
+            usuario.password2 = info['password2']
+            usuario.save()
+            return render(request, 'Blogapp/inicio.html', {'mensaje': f'{usuario.username} editado exitosamente'})
+        else:
+            return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username})
+    else:
+        form = Formulario_Edicion_Usuario(instance=usuario)
+        return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username})
