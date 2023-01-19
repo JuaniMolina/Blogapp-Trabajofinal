@@ -10,21 +10,34 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def inicio (request):
-    return render(request, 'Blogapp/inicio.html')
+    if request.user.is_authenticated:
+        return render(request, 'Blogapp/inicio.html', {'avatar': obtener_avatar(request)})
+    else:
+        return render(request, 'Blogapp/inicio.html')
 
 
 #  Views relacionadas a los posteos
 
 
 def posteos (request):
-    return render(request, 'Blogapp/posteos.html')    
+    if request.user.is_authenticated:
+        return render(request, 'Blogapp/posteos.html', {'avatar': obtener_avatar(request)})
+    else:
+        return render(request, 'Blogapp/posteos.html')    
 
 def lista_posteos (request):
-    posteos = Post.objects.all()
-    if len(posteos) != 0:
-        return render(request, 'Blogapp/lista_posteos.html', {'posteos': posteos})
+    if request.user.is_authenticated:
+        posteos = Post.objects.all()
+        if len(posteos) != 0:
+            return render(request, 'Blogapp/lista_posteos.html', {'posteos': posteos, 'avatar': obtener_avatar(request)})
+        else:
+            return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Todavía no hay posteos. Crea uno!', 'avatar': obtener_avatar(request)})
     else:
-        return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Todavía no hay posteos. Crea uno!'}) 
+        posteos = Post.objects.all()
+        if len(posteos) != 0:
+            return render(request, 'Blogapp/lista_posteos.html', {'posteos': posteos})
+        else:
+            return render(request, 'Blogapp/lista_posteos.html', {'mensaje': 'Todavía no hay posteos. Crea uno!'}) 
 
 @login_required
 def postFormulario(request):
@@ -50,7 +63,10 @@ def postFormulario(request):
 
 def mostrarPost(request, id):
     post = Post.objects.get(id=id)
-    return render(request, 'Blogapp/mostrarPost.html', {'post': post})
+    if request.user.is_authenticated:
+        return render(request, 'Blogapp/mostrarPost.html', {'post': post, 'avatar': obtener_avatar(request)})
+    else:
+        return render(request, 'Blogapp/mostrarPost.html', {'post': post})
 
 
 @login_required
@@ -80,4 +96,7 @@ def editar_post (request, id):
         return render(request, 'Blogapp/editar_post.html', {'form': form, 'post': post, 'avatar': obtener_avatar(request)})
 
 def about (request):
-    return render(request, 'Blogapp/about.html')
+    if request.user.is_authenticated:
+        return render(request, 'Blogapp/about.html', {'avatar': obtener_avatar(request)})
+    else:
+        return render(request, 'Blogapp/about.html')

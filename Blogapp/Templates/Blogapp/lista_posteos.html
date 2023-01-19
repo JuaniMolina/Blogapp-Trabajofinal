@@ -19,7 +19,8 @@
             <!-- <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="#"> Eliminar  </a>  -->
         </li>
     {% endfor %}
-    <div style="text-align: right;">
+    <div style="text-align: center;">
+        <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'nuevoPost' %}"> Crear </a>
         <a class="btn btn-primary btn-xm rounded-pill mt-5-1" href="{% url 'posteos' %}"> Volver </a>
     </div>
 {% endblock %}

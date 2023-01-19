@@ -40,7 +40,7 @@ def login_usuario(request):
             usuario = authenticate(username=username, password=password)
             if usuario is not None:
                 login(request, usuario)
-                return render(request, 'Blogapp/inicio.html', {'mensaje': f'Bienvenido {username}'})
+                return render(request, 'Blogapp/inicio.html', {'mensaje': f'Bienvenido {username}', 'avatar': obtener_avatar(request)})
             else:
                 return render(request, 'Blogapp/Login_usuario.html', {'form': form, 'mensaje': 'USUARIO o CONTRASEÑA incorrectos'})
         else:
@@ -62,9 +62,9 @@ def editar_usuario(request):
             usuario.password1 = info['password1']
             usuario.password2 = info['password2']
             usuario.save()
-            return render(request, 'Blogapp/inicio.html', {'mensaje': f'{usuario.username} editado exitosamente'})
+            return render(request, 'Blogapp/inicio.html', {'mensaje': f'{usuario.username} editado exitosamente', 'avatar': obtener_avatar(request)})
         else:
-            return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username})
+            return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username, 'avatar': obtener_avatar(request)})
     else:
         form = Formulario_Edicion_Usuario(instance=usuario)
-        return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username})
+        return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username, 'avatar': obtener_avatar(request)})
