@@ -1,0 +1,50 @@
+{% extends "Blogapp/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+    Perfil de Usuario
+{% endblock %}
+
+{% block subtitulo %}
+    {{ user.username }}
+{% endblock %}
+
+<style>
+    .li {
+        border: 1px;
+        border-style: groove 1px;
+        
+    }
+</style>
+
+{% block contenido %} 
+    <div style="text-align: center;">
+        <img src="{{ avatar }}" class="rounded-circle mx-auto d-block" alt="..." width="200" height="200"> 
+    </div>
+        <div>
+        <div style="text-align: center;">
+            <ul style="padding-left: 0;">
+                <li>
+                    {{ user.username }}
+                </li>
+                <li>
+                    {{ user.first_name }}
+                </li>
+
+                <li>
+                    {{ user.last_name }}
+                </li>
+                
+                <li>
+                    {{ user.email }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'editar_usuario' %}"> Modificar</a>
+        <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'inicio' %}"> Volver </a>
+    </div>
+{% endblock %}
+

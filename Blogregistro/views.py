@@ -68,3 +68,9 @@ def editar_usuario(request):
     else:
         form = Formulario_Edicion_Usuario(instance=usuario)
         return render(request, 'Blogapp/editar_usuario.html', {'form': form, 'usuario': usuario.username, 'avatar': obtener_avatar(request)})
+
+
+def perfil_usuario (request):
+    usuario = request.user
+    form = Formulario_Edicion_Usuario(instance=usuario)
+    return render(request, 'Blogapp/perfil_usuario.html', {'avatar': obtener_avatar(request)})
