@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from .models import Avatar
+from .froms import Formulario_avatar
 
 from Blogregistro.froms import FormularioRegistro, Formulario_Edicion_Usuario
 from django.contrib.auth.decorators import login_required
@@ -74,3 +75,22 @@ def perfil_usuario (request):
     usuario = request.user
     form = Formulario_Edicion_Usuario(instance=usuario)
     return render(request, 'Blogapp/perfil_usuario.html', {'avatar': obtener_avatar(request)})
+
+def agregar_avatar (request):
+    if request.method == 'POST':
+        form = Formulario_avatar(request.POST, request.FILES)
+        if form.is_valid():
+            avatar = Avatar(usuario=request.user, imagen=request.FILES['imagen'])
+            avatarViejo= Avatar.objects.filter(usuario=request.user)
+            if len(avatarViejo)>0:
+                avatarViejo[0].delete()
+            avatar.save()
+            return render (request, 'Blogapp/perfil_usuario.html', {'form': form, 'avatar': obtener_avatar(request), 'mensaje': 'Avatar agregado exitosamente'})
+        else:
+            return render (request, 'Blogapp/agregar_avatar.html', {'form': form, 'avatar': obtener_avatar(request), 'mensaje': 'Error al agregar el avatar'})
+    else:
+        form = Formulario_avatar()
+        return render(request, 'Blogapp/agregar_avatar.html', {'form': form, 'avatar': obtener_avatar(request), 'mensaje': 'Agrega o modifica tu avatar'})
+
+
+
