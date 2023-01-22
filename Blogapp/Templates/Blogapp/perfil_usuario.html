@@ -20,31 +20,25 @@
 </style>
 
 {% block contenido %} 
-    <div style="text-align: center;">
+    <div style="text-align: center; padding-top: 10px;"> 
         <img src="{{ avatar }}" class="rounded-circle mx-auto d-block" alt="..." width="200" height="200"> 
     </div>
-        <div>
+    <div>
         <div style="text-align: center;">
             <ul style="padding-left: 0;">
-                <li>
-                    {{ user.username }}
-                </li>
-                <li>
-                    {{ user.first_name }}
-                </li>
-
-                <li>
-                    {{ user.last_name }}
-                </li>
-                
-                <li>
-                    {{ user.email }}
-                </li>
+                <li> {{ user.username }} </li>
+                <li> {{ user.first_name }} </li>
+                <li> {{ user.last_name }} </li>
+                <li> {{ user.email }} </li>
+                <li> {{ url }} </li>
+                <li> {{ descripcion }} </li>
             </ul>
         </div>
     </div>
-    <div style="text-align: center;">
-        <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'editar_usuario' %}"> Modificar</a>
+    <div style="text-align: center; padding: 10px 0px">
+        <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'editar_usuario' %}"> Modificar Datos</a>
+        <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'agregar_url' %}"> Agregar Urls</a>
+        <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'agregar_descripcion' %}"> agregar descripcion</a>
         <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'agregar_avatar' %}"> Cambiar Avatar</a>
         <a class="btn btn-primary btn-xm rounded-pill mt-5"  href="{% url 'inicio' %}"> Volver </a>
     </div>

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'Blogapp',
     'Bloggmensaje',
     'Blogregistro',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,5 @@ LOGIN_URL = 'login'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'

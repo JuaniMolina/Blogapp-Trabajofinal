@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block contenido %} 
-    <form action="{% url 'nuevoPost' %}" method="POST"> {% csrf_token %} 
+    <form action="{% url 'nuevoPost' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %} 
         <table>
-            {{ form.as_table }}
+            {{ form.as_table}}
         </table>
         
         <input class="btn btn-primary btn-xm rounded-pill mt-5" type="submit" value="Postear">

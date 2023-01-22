@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
+from PIL import Image
 
 from Blogregistro.views import obtener_avatar
 from Blogapp.forms import PostForm
@@ -42,7 +43,7 @@ def lista_posteos (request):
 @login_required
 def postFormulario(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             info = form.cleaned_data
             titulo = info['titulo']
@@ -50,7 +51,7 @@ def postFormulario(request):
             cuerpo = info['cuerpo']
             autor = info['autor']
             fecha = info['fecha']
-            imagen = info['imagen']
+            imagen = request.FILES['imagen']
             post = Post(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha, imagen=imagen)
             post.save()
             
@@ -60,6 +61,7 @@ def postFormulario(request):
     else:
         form = PostForm()
         return render(request, 'Blogapp/postFormulario.html', {'form': form, 'avatar': obtener_avatar(request)})
+
 
 def mostrarPost(request, id):
     post = Post.objects.get(id=id)
@@ -72,9 +74,11 @@ def mostrarPost(request, id):
 @login_required
 def borrar_post(request, id):
     post = Post.objects.get(id=id)
-    post.delete()
-    return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'Post borrado exitosamente', 'avatar': obtener_avatar(request)})
-
+    if request.user.is_superuser:
+        post.delete()
+        return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'Post borrado exitosamente', 'avatar': obtener_avatar(request)})
+    else:
+        return render(request, 'Blogapp/borrar_post.html', {'mensaje': 'No tenés permisos para borrar este post', 'avatar': obtener_avatar(request)})
 @login_required
 def editar_post (request, id):
     post = Post.objects.get(id=id)
@@ -94,6 +98,7 @@ def editar_post (request, id):
     else:
         form = PostForm(initial={'titulo': post.titulo, 'subtitulo': post.subtitulo, 'cuerpo': post.cuerpo, 'autor': post.autor, 'fecha': post.fecha, 'imagen': post.imagen})
         return render(request, 'Blogapp/editar_post.html', {'form': form, 'post': post, 'avatar': obtener_avatar(request)})
+
 
 def about (request):
     if request.user.is_authenticated:

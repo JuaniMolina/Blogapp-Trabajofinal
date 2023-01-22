@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Proyecto Final - {% block title %} {% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{% static 'Blogapp/assets/favicon.ico' %}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'Blogapp/assets/favicom.png' %}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -31,7 +31,10 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}">{{ user.username }}</a></li>
                         <img src="{{ avatar }}" alt="" style="height: 40px; border-radius: 50%  ;">
-                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'mensajes' %}">Mensajes {% if msj > 0 %} ({{ msj }}) {% endif %}</a></li>
+                        {%if user.is_superuser %}
+                            <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin/">Admin</a></li>
+                        {% endif %}
                     {% else %}    
                         <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Sign Up</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log In</a></li>

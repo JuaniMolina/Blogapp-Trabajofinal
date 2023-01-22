@@ -26,4 +26,13 @@ class Formulario_Edicion_Usuario(UserCreationForm):
 
 class Formulario_avatar(forms.Form):
     imagen = forms.ImageField(label='Imagen')
-    
+
+class Formulario_url(forms.Form):
+    url = forms.URLField(label='URL', max_length=200)
+
+    def __str__(self):
+        return self.url
+
+class Formulario_descripcion(forms.Form):
+    descripcion = forms.CharField(label='Descripcion', max_length=200, widget=forms.Textarea)
+
