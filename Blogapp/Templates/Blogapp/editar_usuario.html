@@ -12,7 +12,7 @@
 
 
 {% block contenido %} 
-    <form action="{% url 'editar_usuario' %}" method="POST"> {% csrf_token %} 
+    <form action="{% url 'editar_usuario' %}" method="POST" style="padding-left: 40%;"> {% csrf_token %} 
         <table>
             {{ form.as_table }}
         </table>

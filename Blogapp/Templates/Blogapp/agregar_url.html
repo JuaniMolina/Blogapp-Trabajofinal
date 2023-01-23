@@ -18,7 +18,7 @@
 {% block contenido %} 
     
     <div>
-        <form style="padding-left: 40%" action="{% url 'agregar_url' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %} 
+        <form style="padding-left: 40%; padding-top: 1em;" action="{% url 'agregar_url' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %} 
             <table>
                 {{ form.as_table }} 
             </table>

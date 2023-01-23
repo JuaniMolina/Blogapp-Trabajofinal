@@ -15,7 +15,7 @@ def obtener_avatar(request):
     if len(lista) != 0:
         avatar = lista[0].imagen.url
     else:
-        avatar = '/media/avatar/defecto.png'
+        avatar = '/media/avatar/defecto.jfif'
     return avatar
 
 def obtener_url(request):
@@ -39,13 +39,14 @@ def registro_usuario(request):
         form= FormularioRegistro(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            form.save()
+            form.save()                        
             return render(request, 'Blogapp/inicio.html', {'form': form, 'mensaje': 'Usuario creado exitosamente'})
         else:
             return render(request, 'Blogapp/Registro_usuario.html', {'form': form, 'mensaje': 'Error al crear el usuario'})   
     else:
         form= FormularioRegistro()
         return render(request, 'Blogapp/Registro_usuario.html', {'form': form})
+        obtener_avatar(request)
 
 
 def login_usuario(request):

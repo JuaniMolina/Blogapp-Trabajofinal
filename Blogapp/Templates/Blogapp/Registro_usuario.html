@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block contenido %} 
-    <form action="{% url 'registro' %}" method="POST"> {% csrf_token %} 
+    <form action="{% url 'registro' %}" method="POST" style="padding-left: 38%; border: solid 1px; padding-bottom: 1rem; "> {% csrf_token %} 
         <table>
             {{ form.as_table }}
         </table>
