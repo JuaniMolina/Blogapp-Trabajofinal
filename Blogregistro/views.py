@@ -122,6 +122,8 @@ def agregar_url (request):
                 urlViejo[0].delete()
             url.save()
             return render (request, 'Blogapp/perfil_usuario.html', {'form': form, 'avatar': obtener_avatar(request), 'url' : obtener_url(request), 'mensaje': 'Url agregada exitosamente'})
+        else:
+            return render (request, 'Blogapp/agregar_url.html', {'form': form, 'avatar': obtener_avatar(request), 'mensaje': 'Error al agregar la url'})
     else:
         form = Formulario_url()
         return render(request, 'Blogapp/agregar_url.html', {'form': form, 'avatar': obtener_avatar(request)})
